@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CreateInk.Models
+namespace CreateInk.Domain.Dtos
 {
-    public class Artist
+    public class ArtistDto
     {
-
         public Guid Id { get; set; }
 
         public string FirstName { get; set; }
@@ -16,12 +15,10 @@ namespace CreateInk.Models
 
         public int Age { get; set; }
 
-        public virtual ICollection<Art> Arts { get; set; }
+        public List<ArtDto> Arts { get; set; }
 
         public string Description { get; set; }
 
-        public Guid RoleId { get; set; }
-
-        public virtual Role Role { get; set; }
+        public RoleDto Role { get; set; }
     }
 }

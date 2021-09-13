@@ -29,6 +29,8 @@ namespace CreateInk
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddTransient<IArtistServices>();
+            
             services.AddDbContext<CreateInkContext>(options => 
             options.UseSqlServer(@"Server=localhost;Database=myDataBase;Trusted_Connection=True;"));
         }

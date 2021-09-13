@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CreateInk.Models
+namespace CreateInk.Domain.Dtos
 {
-    public class Art
+    public class ArtDto
     {
         public Guid Id { get; set; }
 
@@ -15,8 +15,6 @@ namespace CreateInk.Models
 
         public DateTime Date { get; set; }
 
-        public Guid ArtistId { get; set; }
-
-        public virtual Artist Artist { get; set; }
+        public  ArtistDto Artist { get; set; }
     }
 }
