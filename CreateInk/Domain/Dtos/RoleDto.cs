@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CreateInk.Models
+namespace CreateInk.Domain.Dtos
 {
-    public class Role
+    public class RoleDto
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public virtual ICollection<Permission> Permissions { get; set; }
+        public List<PermissionDto> Permissions { get; set; }
     }
 }

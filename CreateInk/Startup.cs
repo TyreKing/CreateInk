@@ -1,4 +1,5 @@
 using CreateInk.Context;
+using CreateInk.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,7 @@ namespace CreateInk
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddTransient<IUserService, UserService>();
             services.AddDbContext<CreateInkContext>(options => 
             options.UseSqlServer(@"Server=localhost;Database=myDataBase;Trusted_Connection=True;"));
         }

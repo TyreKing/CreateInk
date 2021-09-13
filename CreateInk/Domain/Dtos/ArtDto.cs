@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CreateInk.Models
+namespace CreateInk.Domain.Dtos
 {
-    public class Permission
+    public class ArtDto
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public  UserDto Artist { get; set; }
     }
 }
