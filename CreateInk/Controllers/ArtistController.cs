@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CreateInk.Context;
+using CreateInk.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,20 +15,30 @@ namespace CreateInk.Controllers
     {
 
         private readonly ILogger<ArtistController> _logger;
-        private readonly IArtistServices _artistServices;
+        private readonly IUserService _userService;
 
 
-        public ArtistController(ILogger<ArtistController> logger, IArtistServices ArtistService)
+        public ArtistController(ILogger<ArtistController> logger, IUserService artistServices)
         {
             _logger = logger;
-            _artistServices = ArtistService;
+            _userService = artistServices;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get([FromBody] Guid id)
+        
+        [HttpGet("")] //https://localhost:44369/artist
+        public IActionResult GetArtists()
         {
-            var result = _artistServices.GetArtist(id);
-            return Ok();
+            var result = _userService.GetArtists();
+            return Ok(result);
         }
+
+        [HttpGet("{id}")] //https://localhost:44369/artist/id?id=...
+        public IActionResult GetArtist([FromQuery] Guid id)
+        {
+            var result = _userService.GetArtist(id);
+            return Ok(result);
+        }
+
+       
     }
 }

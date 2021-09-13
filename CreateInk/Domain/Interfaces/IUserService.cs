@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace CreateInk
 {
-    public interface IArtistServices 
+    public interface IUserService
     {
-       public ArtistDto GetArtist(Guid id);
+        public UserDto GetArtist(Guid id);
+
+        public IEnumerable<UserDto> GetArtists();
+
+        
     }
 }

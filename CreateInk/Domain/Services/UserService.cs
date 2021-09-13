@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CreateInk.Services
 {
-    public class ArtistServices : IArtistServices
+    public class UserService : IUserService
     {
-        private ArtistRepository _ArtistRepo;
+        private UserRepository _UserRepo;
 
-        public ArtistServices(CreateInkContext context)
+        public UserService(CreateInkContext context)
         {
-            _ArtistRepo = new ArtistRepository(context);
+            _UserRepo = new UserRepository(context);
         }
 
-        public ArtistDto GetArtist(Guid id)
+        public UserDto GetArtist(Guid id)
         {
             try
             {
-                var artist = _ArtistRepo.GetById(id);
+                var artist = _UserRepo.GetById(id);
                 if (null == artist)
                 {
                     throw new Exception("Artist Not Found");
@@ -32,6 +32,12 @@ namespace CreateInk.Services
             {
                 throw e;
             }
+        }
+
+        public IEnumerable<UserDto> GetArtists()
+        {
+            var artists = _UserRepo.GetArtists().ToList();
+            return artists.Select(x => x.ToDto());
         }
     }
 }

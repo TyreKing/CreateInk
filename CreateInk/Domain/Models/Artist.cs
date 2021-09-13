@@ -25,17 +25,17 @@ namespace CreateInk.Models
 
         public virtual Role Role { get; private set; }
 
-        public ArtistDto ToDto()
+        public UserDto ToDto()
         {
-            return new ArtistDto
+            return new UserDto
             {
                 Id = Id,
                 Age = Age,
-                Arts = Arts.Select(x => x.ToDto()).ToList(),
+               // Arts = Arts.Select(x => x.ToDto()).ToList(),
                 Description = Description,
                 FirstName = FirstName,
                 LastName = LastName,
-                Role = Role.ToDto()
+                //Role = Role.ToDto()
             };
         }
     }

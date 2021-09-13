@@ -1,4 +1,5 @@
 ﻿using CreateInk.Context;
+using CreateInk.Domain.Enum;
 using CreateInk.Models;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace CreateInk.Infrastructure.Repositories
 {
-    public class ArtistRepository
+    public class UserRepository
     {
         private CreateInkContext _context;
-        public ArtistRepository(CreateInkContext context) 
+        public UserRepository(CreateInkContext context) 
         {
             _context = context;
         }
@@ -20,5 +21,12 @@ namespace CreateInk.Infrastructure.Repositories
             var artist = _context.Artists.FirstOrDefault(x => x.Id == id);
             return artist;
         }
+
+        public IQueryable<Artist> GetArtists()
+        {
+            return _context.Artists.Where(x => x.RoleId == RolesEnum.Attribute[(int)AccessRoles.Artist]);
+        }
+
+        
     }
 }

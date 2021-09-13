@@ -15,6 +15,6 @@ namespace CreateInk.Domain.Dtos
 
         public DateTime Date { get; set; }
 
-        public  ArtistDto Artist { get; set; }
+        public  UserDto Artist { get; set; }
     }
 }

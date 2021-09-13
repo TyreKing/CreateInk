@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CreateInk.Domain.Dtos
 {
-    public class ArtistDto
+    public class UserDto
     {
         public Guid Id { get; set; }
 
