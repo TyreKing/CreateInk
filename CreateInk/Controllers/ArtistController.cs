@@ -39,6 +39,10 @@ namespace CreateInk.Controllers
             return Ok(result);
         }
 
+
+        //[HttpPost("")]
+        //public IActionResult CreateArtist()
+
        
     }
 }
