@@ -25,7 +25,6 @@ namespace CreateInk.Models
             return new ArtDto
             {
                 Description = Description,
-                Artist = Artist.ToDto(),
                 Date = Date,
                 Id = Id,
                 Name = Name
