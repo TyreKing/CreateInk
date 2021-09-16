@@ -12,6 +12,7 @@ namespace CreateInk
 
         public IEnumerable<UserDto> GetArtists();
 
-        
+        public Guid CreateArtist(UserDto artistDto);
+
     }
 }

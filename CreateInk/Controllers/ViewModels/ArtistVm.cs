@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CreateInk.Domain.Dtos;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,17 +10,34 @@ namespace CreateInk.Controllers.ViewModels
 {
     public class ArtistVm
     {
-        [JsonProperty("FirstName")]
+        [JsonProperty("firstName")]
         public string FirstName { get; set; }
 
-        [JsonProperty("LastName")]
+        [JsonProperty("lastName")]
         public string LastName { get; set; }
 
-        [JsonProperty("Age")]
+        [JsonProperty("age")]
         public int Age { get; set; }
 
-        [JsonProperty("Description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("roleId")]
+        public Guid RoleId { get; set; }
+
+        public UserDto ToDto()
+        {
+            return new UserDto()
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                Age = Age,
+                Description = Description,
+                Role = new RoleDto()
+                {
+                    Id = RoleId
+                }
+            };
+        }
     }
 }

@@ -17,13 +17,22 @@ namespace CreateInk.Models
 
         public int Age { get; private set; }
 
-        public virtual ICollection<Art> Arts { get; private set; }
+        public virtual ICollection<Art> Arts { get; private set; } = new HashSet<Art>();
 
         public string Description { get; private set; }
 
         public Guid RoleId { get; private set; }
 
         public virtual Role Role { get; private set; }
+
+        public Artist(UserDto dto)
+        {
+            FirstName = dto.FirstName;
+            LastName = dto.LastName;
+            Age = dto.Age;
+            Description = dto.Description;
+            RoleId = dto.Role.Id;
+        }
 
         public UserDto ToDto()
         {

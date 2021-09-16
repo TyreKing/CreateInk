@@ -15,7 +15,7 @@ namespace CreateInk.Domain.Dtos
 
         public int Age { get; set; }
 
-        public List<ArtDto> Arts { get; set; }
+        public List<ArtDto> Arts { get; set; } = new List<ArtDto>();
 
         public string Description { get; set; }
 

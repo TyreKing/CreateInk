@@ -1,4 +1,5 @@
 ﻿using CreateInk.Context;
+using CreateInk.Controllers.ViewModels;
 using CreateInk.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -40,8 +41,12 @@ namespace CreateInk.Controllers
         }
 
 
-        //[HttpPost("")]
-        //public IActionResult CreateArtist()
+        [HttpPost("")]
+        public IActionResult CreateArtist([FromBody] ArtistVm artistVm)
+        {
+            var artistId = _userService.CreateArtist(artistVm.ToDto());
+            return CreatedAtAction("GetArtist", artistId);
+        }
 
        
     }
