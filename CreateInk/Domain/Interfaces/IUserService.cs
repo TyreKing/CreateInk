@@ -14,5 +14,7 @@ namespace CreateInk
 
         public Guid CreateArtist(UserDto artistDto);
 
+        public void DeleteArtist(Guid artistId);
+
     }
 }

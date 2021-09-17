@@ -48,6 +48,13 @@ namespace CreateInk.Controllers
             return CreatedAtAction("GetArtist", artistId);
         }
 
+        [HttpDelete("id")]
+        public IActionResult DeleteArtist([FromQuery] Guid id)
+        {
+            _userService.DeleteArtist(id);
+            return Ok();
+        }
+
        
     }
 }

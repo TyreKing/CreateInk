@@ -45,10 +45,28 @@ namespace CreateInk.Services
 
         public Guid CreateArtist(UserDto artistDto)
         {
-            var artist = new Artist(artistDto);//TODO fully flesh out Artist contructor
+            var artist = new Artist().Create(artistDto);
             _Context.Artists.Add(artist); 
             _Context.SaveChanges();
             return artist.Id;
+        }
+
+        public void DeleteArtist(Guid artistId)
+        {
+            try
+            {
+                var artist = _UserRepo.GetById(artistId);
+                if (artist == null)
+                {
+                    throw new Exception("Artist does not exist.");
+                }
+
+                _Context.Remove(artist);
+                _Context.SaveChanges();
+            }catch(Exception e)
+            {
+                throw e;
+            } 
         }
     }
 }
