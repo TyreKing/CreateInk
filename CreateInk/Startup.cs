@@ -1,4 +1,6 @@
 using CreateInk.Context;
+using CreateInk.Domain.Interfaces;
+using CreateInk.Domain.Services;
 using CreateInk.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +33,7 @@ namespace CreateInk
             });
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IArtService, ArtService>();
             services.AddDbContext<CreateInkContext>(options => 
             options.UseLazyLoadingProxies().UseSqlServer(@"Server=localhost;Database=myDataBase;Trusted_Connection=True;"));
         }
