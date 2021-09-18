@@ -12,11 +12,13 @@ namespace CreateInk.Services
     public class UserService : IUserService
     {
         private UserRepository _UserRepo;
+        private ArtRepository _artRepo;
         private CreateInkContext _Context; 
 
         public UserService(CreateInkContext context)
         {
             _UserRepo = new UserRepository(context);
+            _artRepo = new ArtRepository(context);
             _Context = context;
         }
 
@@ -45,7 +47,7 @@ namespace CreateInk.Services
 
         public Guid CreateArtist(UserDto artistDto)
         {
-            var artist = new Artist().Create(artistDto);
+            var artist = Artist.Create(artistDto);
             _Context.Artists.Add(artist); 
             _Context.SaveChanges();
             return artist.Id;
@@ -58,7 +60,7 @@ namespace CreateInk.Services
                 var artist = _UserRepo.GetById(artistId);
                 if (artist == null)
                 {
-                    throw new Exception("Artist does not exist.");
+                    throw new Exception("Artist Does Not Exist.");
                 }
 
                 _Context.Remove(artist);
@@ -67,6 +69,22 @@ namespace CreateInk.Services
             {
                 throw e;
             } 
+        }
+
+        public Guid AddArt(ArtDto artDto)
+        {
+            var artist = _UserRepo.GetById(artDto.ArtistId);
+            if (null == artist.Id)
+            {
+                throw new Exception("Artist Not Exist");
+            }
+            var art = Art.Create(artDto);
+            _Context.Arts.Add(art);
+            //_Context.SaveChanges();
+            artist.AddArt(art);
+            _Context.SaveChanges();
+            return artist.Id;
+
         }
     }
 }

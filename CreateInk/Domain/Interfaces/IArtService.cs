@@ -11,7 +11,6 @@ namespace CreateInk.Domain.Interfaces
         public ArtDto GetArt(Guid id);
 
         public IEnumerable<ArtDto>GetArts();
-        
-        
+
     }
 }

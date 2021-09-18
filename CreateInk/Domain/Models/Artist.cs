@@ -8,6 +8,7 @@ namespace CreateInk.Models
 {
     public class Artist
     {
+        
 
         public Guid Id { get; private set; }
 
@@ -17,7 +18,7 @@ namespace CreateInk.Models
 
         public int Age { get; private set; }
 
-        public virtual ICollection<Art> Arts { get; private set; } = new HashSet<Art>();
+        public virtual ICollection<Art> Arts { get; private set; } = new List<Art>();
 
         public string Description { get; private set; }
 
@@ -25,7 +26,7 @@ namespace CreateInk.Models
 
         public virtual Role Role { get; private set; }
 
-        public Artist Create(UserDto dto)
+        public static Artist Create(UserDto dto)
         {
             return new Artist()
             {
@@ -51,6 +52,11 @@ namespace CreateInk.Models
                 LastName = LastName,
                 Role = Role.ToDto()
             };
+        }
+
+        public void AddArt(Art art)
+        {
+            Arts.Add(art);
         }
     }
 }

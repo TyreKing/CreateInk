@@ -23,5 +23,15 @@ namespace CreateInk.Models
                 Permissions = Permissions.Select(x => x.ToDto()).ToList()
             };
         }
+
+        public static Role Create(RoleDto dto)
+        {
+            return new Role()
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Permissions = null
+            };
+        }
     }
 }

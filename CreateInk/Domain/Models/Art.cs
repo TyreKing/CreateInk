@@ -27,7 +27,21 @@ namespace CreateInk.Models
                 Description = Description,
                 Date = Date,
                 Id = Id,
-                Name = Name
+                Name = Name,
+                ArtistId = ArtistId
+
+            };
+        }
+
+        public static Art Create(ArtDto dto)
+        {
+            return new Art()
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                ArtistId = dto.ArtistId,
+                Date = dto.Date,
+                Description = dto.Description
             };
         }
         

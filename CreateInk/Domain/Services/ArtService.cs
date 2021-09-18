@@ -17,6 +17,8 @@ namespace CreateInk.Domain.Services
             _artRepo = new ArtRepository(context);
         }
 
+       
+
         public ArtDto GetArt(Guid id)
         {
             var art = _artRepo.GetById(id);

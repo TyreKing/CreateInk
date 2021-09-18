@@ -55,6 +55,11 @@ namespace CreateInk.Controllers
             return Ok();
         }
 
-       
+       [HttpPost("art")]
+       public IActionResult AddArt([FromBody] ArtVm artVm)
+        {
+            var artistId = _userService.AddArt(artVm.ToDto());
+            return Ok(artistId);
+        }
     }
 }
