@@ -46,7 +46,7 @@ namespace CreateInk.Models
             {
                 Id = Id,
                 Age = Age,
-                Arts = Arts.Select(x => x.ToDto()).ToList(),
+                Arts = Arts?.Select(x => x.ToDto()).ToList(),
                 Description = Description,
                 FirstName = FirstName,
                 LastName = LastName,

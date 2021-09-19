@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateInk", "CreateInk\CreateInk.csproj", "{A12F3CB5-58DB-48BB-82CF-A3FDCE6FB2AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateInkTest", "CreateInkTest\CreateInkTest.csproj", "{9228C29C-2E94-4D14-8894-70F33F7F5A2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A12F3CB5-58DB-48BB-82CF-A3FDCE6FB2AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A12F3CB5-58DB-48BB-82CF-A3FDCE6FB2AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A12F3CB5-58DB-48BB-82CF-A3FDCE6FB2AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9228C29C-2E94-4D14-8894-70F33F7F5A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9228C29C-2E94-4D14-8894-70F33F7F5A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9228C29C-2E94-4D14-8894-70F33F7F5A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9228C29C-2E94-4D14-8894-70F33F7F5A2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
