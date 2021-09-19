@@ -34,8 +34,8 @@ namespace CreateInk
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArtService, ArtService>();
-            services.AddDbContext<CreateInkContext>(options => 
-            options.UseLazyLoadingProxies().UseSqlServer(@"Server=localhost;Database=myDataBase;Trusted_Connection=True;"));
+            services.AddDbContext<CreateInkContext>(options => options.UseSqlServer(@"Server=localhost;Database=myDataBase;Trusted_Connection=True;"));
+            // options.UseLazyLoadingProxies().UseSqlServer(@"Server=localhost;Database=myDataBase;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

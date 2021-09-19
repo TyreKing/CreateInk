@@ -1,6 +1,7 @@
 ﻿using CreateInk.Context;
 using CreateInk.Domain.Enum;
 using CreateInk.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace CreateInk.Infrastructure.Repositories
 
         public IQueryable<Artist> GetArtists()
         {
-            return _context.Artists.Where(x => x.RoleId == RolesEnum.Attribute[(int)AccessRoles.Artist]);
+            return _context.Artists.Include(x => x.Role).ThenInclude(x => x.Permissions).Where(x => x.RoleId == RolesEnum.Attribute[(int)AccessRoles.Artist]);
+             //_context.Artists.Where(x => x.RoleId == RolesEnum.Attribute[(int)AccessRoles.Artist]);
         }
 
         
