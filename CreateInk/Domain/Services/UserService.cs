@@ -29,7 +29,7 @@ namespace CreateInk.Services
                 var artist = _UserRepo.GetById(id);
                 if (null == artist)
                 {
-                    throw new Exception("Artist Not Found");
+                    throw new KeyNotFoundException("Artist Not Found");
                 }
                 return artist.ToDto();
             }
@@ -60,7 +60,7 @@ namespace CreateInk.Services
                 var artist = _UserRepo.GetById(artistId);
                 if (artist == null)
                 {
-                    throw new Exception("Artist Does Not Exist.");
+                    throw new KeyNotFoundException("Artist Does Not Exist.");
                 }
 
                 _Context.Remove(artist);
@@ -76,7 +76,7 @@ namespace CreateInk.Services
             var artist = _UserRepo.GetById(artDto.ArtistId);
             if (null == artist.Id)
             {
-                throw new Exception("Artist Not Exist");
+                throw new KeyNotFoundException("Artist Not Exist");
             }
             var art = Art.Create(artDto);
             _Context.Arts.Add(art);

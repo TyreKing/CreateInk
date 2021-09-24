@@ -56,7 +56,6 @@ namespace CreateInkTest
             var artists = new List<UserDto>
             {
                new UserDto{
-                   Id = Guid.Parse("b100ab4a-914b-4c59-889d-320fcec8582b"),
                    Age = 25,
                    Description = "Test 1",
                    FirstName = "f1",
@@ -70,7 +69,6 @@ namespace CreateInkTest
                    }
                },
                new UserDto{
-                   Id = Guid.Parse("d6cbe464-c5fd-4f10-96e6-7c5ac1a165bb"),
                    Age = 33,
                    Description = "Test 2",
                    FirstName = "f2",
@@ -84,7 +82,6 @@ namespace CreateInkTest
                    }
                },
                new UserDto{
-                   Id = Guid.Parse("4725e6a9-359a-412e-b28e-617c2b094f1e"),
                    Age = 19,
                    Description = "Test 3",
                    FirstName = "f3",
@@ -117,30 +114,31 @@ namespace CreateInkTest
             context.SaveChanges();
         }
 
-        private UserService SetUpService()
+        private UserService SetUpService(CreateInkContext context)
         {
-            using var context = new CreateInkContext(CreateNewContextOptions());
             SeedDb(context);
             var userService = new UserService(context);
             return userService;
         }
 
         [Fact]
-        public void Get_GetAllArtist()
+        public void Get_All_Artists()
         {
-            var userService = SetUpService();
+            using var context = new CreateInkContext(CreateNewContextOptions());
+            var userService = SetUpService(context);
             var artist = userService.GetArtists();
             Assert.True(artist.Any());
         }
 
 
         [Fact]
-        public void Get_GetAllArtist2()
+        public void Get_Artist_By_Id()
         {
-          
-            var userService = SetUpService();
-            var artist = userService.GetArtists();
-            Assert.True(artist.Any());
+            using var context = new CreateInkContext(CreateNewContextOptions());
+            var userService = SetUpService(context);
+            var artistId = userService.GetArtists().Select(x =>x.Id).First();
+            var artist = userService.GetArtist(artistId);
+            Assert.True(null != artist);
         }
     }
 }
