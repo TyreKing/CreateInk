@@ -9,25 +9,43 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CreateInk;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CreateInkTest
 {
     public class ArtistServiceTest
     {
-        private DbContextOptions<CreateInkContext> dbContextOptions = new DbContextOptionsBuilder<CreateInkContext>()
-            .UseInMemoryDatabase(databaseName: "CreateInkDb").Options;
+        //private DbContextOptions<CreateInkContext> dbContextOptions = new DbContextOptionsBuilder<CreateInkContext>()
+        //    .UseInMemoryDatabase(databaseName: "CreateInkDb").Options;
         private IUserService _userService;
 
         
-        public void SetUp()
+        //public void SetUp(bool seedData = false)
+        //{
+        //    if(seedData)SeedDb();
+        //    _userService = new UserService(new CreateInkContext(dbContextOptions));
+        //}
+
+        private static DbContextOptions<CreateInkContext> CreateNewContextOptions()
         {
-            SeedDb();
-            _userService = new UserService(new CreateInkContext(dbContextOptions));
+            // Create a fresh service provider, and therefore a fresh 
+            // InMemory database instance.
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
+
+            // Create a new options instance telling the context to use an
+            // InMemory database and the new service provider.
+            var builder = new DbContextOptionsBuilder<CreateInkContext>();
+            builder.UseInMemoryDatabase(databaseName: "CreateInkDb")
+                   .UseInternalServiceProvider(serviceProvider);
+
+            return builder.Options;
         }
 
-        private void SeedDb()
+
+        private void SeedDb(CreateInkContext context)
         {
-            using var context = new CreateInkContext(dbContextOptions);
 
             var roles = new List<RoleDto>()
             {
@@ -99,12 +117,29 @@ namespace CreateInkTest
             context.SaveChanges();
         }
 
+        private UserService SetUpService()
+        {
+            using var context = new CreateInkContext(CreateNewContextOptions());
+            SeedDb(context);
+            var userService = new UserService(context);
+            return userService;
+        }
 
         [Fact]
         public void Get_GetAllArtist()
         {
-            SetUp();
-            var artist = _userService.GetArtists();
+            var userService = SetUpService();
+            var artist = userService.GetArtists();
+            Assert.True(artist.Any());
+        }
+
+
+        [Fact]
+        public void Get_GetAllArtist2()
+        {
+          
+            var userService = SetUpService();
+            var artist = userService.GetArtists();
             Assert.True(artist.Any());
         }
     }
