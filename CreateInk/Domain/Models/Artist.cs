@@ -58,5 +58,12 @@ namespace CreateInk.Models
         {
             Arts.Add(art);
         }
+
+        //public static Artist Update(UserDto dto)
+        //{
+        //   // var Artist = new Artist();
+        //   //var artist =  AutoMapper.Mapper.Map<UserDto, Artist>(dto, Artist);
+        //   // dbContext.Save();
+        //}
     }
 }

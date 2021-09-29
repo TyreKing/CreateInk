@@ -84,7 +84,18 @@ namespace CreateInk.Services
             artist.AddArt(art);
             _Context.SaveChanges();
             return artist.Id;
+        }
 
+        public Guid UpdateArtist(UserDto artistDto)
+        {
+            var artist = _UserRepo.GetById(artistDto.Id);
+            if (null == artist.Id)
+            {
+                throw new KeyNotFoundException("Artist Not Exist");
+            }
+            //artist.Update(artistDto);
+            _Context.Artists.Update(artist);
+            return artist.Id;
         }
     }
 }

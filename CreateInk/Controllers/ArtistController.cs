@@ -1,6 +1,7 @@
 ﻿using CreateInk.Context;
 using CreateInk.Controllers.ViewModels;
 using CreateInk.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -60,6 +61,14 @@ namespace CreateInk.Controllers
         {
             var artistId = _userService.AddArt(artVm.ToDto());
             return Ok(artistId);
+        }
+
+        [HttpPatch("{Id}")]
+        public IActionResult UpdateArtist([FromQuery]Guid id, [FromBody] JsonPatchDocument<ArtistVm> patch)
+        {
+           // var artist = _userService.UpdateArtist(id, patch);
+            
+            return Ok();
         }
     }
 }
