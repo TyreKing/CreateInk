@@ -1,9 +1,11 @@
 using CreateInk.Context;
 using CreateInk.Domain.Interfaces;
 using CreateInk.Domain.Services;
+using CreateInk.Helper;
 using CreateInk.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.IO;
 using System.Reflection;
@@ -38,6 +41,11 @@ namespace CreateInk
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+                
+                //Swashbuckle.AspNetCore doesn't work propertly with this type JsonPatchDocument<UpdateModel>, 
+                //which doesn’t represent the expected patch request doument.
+                //You need to customize a document filter to modify the generated specification.
+                c.DocumentFilter<JsonPatchDocumentFilter>();
             });
 
             services.AddControllersWithViews();
@@ -46,6 +54,7 @@ namespace CreateInk
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddSwaggerExamplesFromAssemblyOf<JsonPatchUserRequestExample>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArtService, ArtService>();
             services.AddDbContext<CreateInkContext>(options => options.UseSqlServer(@"Server=localhost;Database=myDataBase;Trusted_Connection=True;"));
@@ -81,7 +90,6 @@ namespace CreateInk
                 app.UseHsts();
             }
 
-            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

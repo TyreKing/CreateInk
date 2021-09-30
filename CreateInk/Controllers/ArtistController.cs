@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch.Operations;
+using Swashbuckle.AspNetCore.Filters;
+using CreateInk.Helper;
 
 namespace CreateInk.Controllers
 {
@@ -91,6 +94,7 @@ namespace CreateInk.Controllers
         /// <param name="id"></param>
         /// <param name="patch"></param>
         /// <returns></returns>
+        [SwaggerRequestExample(typeof(Helper.Operation), typeof(JsonPatchUserRequestExample))]
         [HttpPatch("{Id}", Name = "UpdateArtist")]
         public IActionResult UpdateArtist(Guid id, [FromBody] JsonPatchDocument<UserUpdateDto> patch)
         {
