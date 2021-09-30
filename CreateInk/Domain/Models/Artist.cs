@@ -12,7 +12,7 @@ namespace CreateInk.Models
 
         public Guid Id { get; private set; }
 
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public string FirstName { get; private set; }
 
@@ -31,6 +31,8 @@ namespace CreateInk.Models
         public byte [] PasswordHash { get; private set; }
 
         public byte [] PasswordSalt { get; private set; }
+
+        public string  Email { get; set; }
 
         public static Artist Create(UserDto dto, byte [] passwordHash, byte [] passwordSalt)
         {

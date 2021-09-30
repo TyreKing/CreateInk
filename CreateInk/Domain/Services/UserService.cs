@@ -31,7 +31,7 @@ namespace CreateInk.Services
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = _context.Artists.SingleOrDefault(x => x.UserName == username);
+            var user = _context.Artists.SingleOrDefault(x => x.Username == username);
 
             // check if username exists
             if (user == null)
@@ -77,7 +77,7 @@ namespace CreateInk.Services
                 throw new AuthenticationException("Password required");
             }
 
-            if(_userRepo.GetArtists().Any(x => x.UserName == artistDto.UserName))
+            if(_userRepo.GetArtists().Any(x => x.Username == artistDto.UserName))
             {
                 throw new AuthenticationException($"Username \"{artistDto.UserName}\" is already taken");
             }
