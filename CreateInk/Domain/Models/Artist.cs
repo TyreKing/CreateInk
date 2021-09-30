@@ -8,7 +8,7 @@ namespace CreateInk.Models
 {
     public class Artist
     {
-        
+
 
         public Guid Id { get; private set; }
 
@@ -37,7 +37,7 @@ namespace CreateInk.Models
                 RoleId = dto.Role.Id,
                 Arts = null
             };
-            
+
         }
 
         public UserDto ToDto()
@@ -59,11 +59,27 @@ namespace CreateInk.Models
             Arts.Add(art);
         }
 
-        //public static Artist Update(UserDto dto)
-        //{
-        //   // var Artist = new Artist();
-        //   //var artist =  AutoMapper.Mapper.Map<UserDto, Artist>(dto, Artist);
-        //   // dbContext.Save();
-        //}
+        public UserUpdateDto ToUpdateDto()
+        {
+            return new UserUpdateDto()
+            {
+                Id = Id,
+                Age = Age,
+                Description = Description,
+                FirstName = FirstName,
+                LastName = LastName,
+                RoleId = RoleId
+            };
+        }
+
+        public void Update(UserUpdateDto dto)
+        {
+            Id = dto.Id;
+            Age = dto.Age;
+            Description = dto.Description;
+            FirstName = dto.FirstName;
+            LastName = dto.LastName;
+            RoleId = dto.RoleId;
+        }
     }
 }

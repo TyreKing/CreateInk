@@ -4,6 +4,7 @@ using CreateInk.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using CreateInk.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,48 +27,74 @@ namespace CreateInk.Controllers
             _userService = artistServices;
         }
 
-        
-        [HttpGet("")] //https://localhost:44369/artist
+        /// <summary>
+        /// GetArtists
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("", Name = "GetArtists")] //https://localhost:44369/artist
         public IActionResult GetArtists()
         {
             var result = _userService.GetArtists();
             return Ok(result);
         }
 
-        [HttpGet("{id}")] //https://localhost:44369/artist/id?id=...
-        public IActionResult GetArtist([FromQuery] Guid id)
+        /// <summary>
+        /// GetArtist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}", Name = "GetArtist")] //https://localhost:44369/artist/id?id=...
+        public IActionResult GetArtist(Guid id)
         {
             var result = _userService.GetArtist(id);
             return Ok(result);
         }
 
-
-        [HttpPost("")]
+        /// <summary>
+        /// CreateArtist
+        /// </summary>
+        /// <param name="artistVm"></param>
+        /// <returns></returns>
+        [HttpPost("", Name = "CreateArtist")]
         public IActionResult CreateArtist([FromBody] ArtistVm artistVm)
         {
             var artistId = _userService.CreateArtist(artistVm.ToDto());
             return CreatedAtAction("GetArtist", artistId);
         }
 
-        [HttpDelete("id")]
-        public IActionResult DeleteArtist([FromQuery] Guid id)
+        /// <summary>
+        /// DeleteArtist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}", Name = "DeleteArtist")]
+        public IActionResult DeleteArtist(Guid id)
         {
             _userService.DeleteArtist(id);
             return Ok();
         }
 
-       [HttpPost("art")]
+        /// <summary>
+        /// AddArt
+        /// </summary>
+        /// <param name="artVm"></param>
+        /// <returns></returns>
+        [HttpPost("art", Name = "AddArt")]
        public IActionResult AddArt([FromBody] ArtVm artVm)
         {
             var artistId = _userService.AddArt(artVm.ToDto());
             return Ok(artistId);
         }
-
-        [HttpPatch("{Id}")]
-        public IActionResult UpdateArtist([FromQuery]Guid id, [FromBody] JsonPatchDocument<ArtistVm> patch)
+        /// <summary>
+        /// UpdateArtist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patch"></param>
+        /// <returns></returns>
+        [HttpPatch("{Id}", Name = "UpdateArtist")]
+        public IActionResult UpdateArtist(Guid id, [FromBody] JsonPatchDocument<UserUpdateDto> patch)
         {
-           // var artist = _userService.UpdateArtist(id, patch);
-            
+            _userService.UpdateArtist(id, patch);
             return Ok();
         }
     }

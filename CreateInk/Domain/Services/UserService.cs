@@ -2,6 +2,7 @@
 using CreateInk.Domain.Dtos;
 using CreateInk.Infrastructure.Repositories;
 using CreateInk.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,14 +87,16 @@ namespace CreateInk.Services
             return artist.Id;
         }
 
-        public Guid UpdateArtist(UserDto artistDto)
+        public Guid UpdateArtist(Guid id, JsonPatchDocument<UserUpdateDto> patch)
         {
-            var artist = _UserRepo.GetById(artistDto.Id);
+            var artist = _UserRepo.GetById(id);
             if (null == artist.Id)
             {
                 throw new KeyNotFoundException("Artist Not Exist");
             }
-            //artist.Update(artistDto);
+            var artistUpdate= artist.ToUpdateDto();
+            patch.ApplyTo(artistUpdate);
+            artist.Update(artistUpdate);
             _Context.Artists.Update(artist);
             return artist.Id;
         }

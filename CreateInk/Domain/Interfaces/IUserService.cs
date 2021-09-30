@@ -1,4 +1,5 @@
 ﻿using CreateInk.Domain.Dtos;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace CreateInk
         public void DeleteArtist(Guid artistId);
 
         public Guid AddArt(ArtDto artDto);
+
+        Guid UpdateArtist(Guid id, JsonPatchDocument<UserUpdateDto> patch);
 
 
     }

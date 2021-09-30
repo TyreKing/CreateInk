@@ -21,14 +21,23 @@ namespace CreateInk.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetArt([FromQuery]Guid id)
+        /// <summary>
+        /// GetArt
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}", Name = "GetArt")]
+        public IActionResult GetArt(Guid id)
         {
             var result = _artService.GetArt(id);
             return Ok(result);
         }
 
-        [HttpGet("")]
+        /// <summary>
+        /// GetArts
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("", Name = "GetArts")]
         public IActionResult GetArts()
         {
             var result = _artService.GetArts();
