@@ -94,7 +94,7 @@ namespace CreateInkTest
                        }
                    }
                }
-            }.Select(x => Artist.Create(x)).ToList();
+            }.Select(x => Artist.Create(x, new byte [0], new byte [0])).ToList(); //TODO Set up authtication testing
 
             var arts = new List<ArtDto>
             {
