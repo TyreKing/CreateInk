@@ -1,0 +1,56 @@
+.container {
+    background-color: #fff;
+    width: 70%;
+    height: 26rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: auto;
+    margin-top: 15%;
+    padding: 5rem 2rem;
+}
+
+.login-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    background-color: #F2F1E8;
+    height: 17rem;
+}
+
+ul {
+    padding: 0;
+    margin-top: 5rem;
+    list-style-type: none;
+    display: grid;
+    justify-content: center;
+}
+
+.submit-login {
+    display: grid;
+    justify-content: center;
+    height: 2rem;
+    
+}
+
+.btn {
+    color: #fff;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    background: #050533;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.login-options-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.login-option {
+    background-color: #C4C4C4;
+    padding-left: 4rem;
+    padding-right: 1rem;
+    color: #050533;
+}
+
