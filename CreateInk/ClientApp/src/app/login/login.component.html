@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="login-wrapper">
+    <div class="content-wrapper">
         <ul>
             <li class="logo"></li>
             <li><input type="text" class="login-input username" placeholder="Username"></li>
@@ -10,7 +10,8 @@
         </div>
     </div>
     <div class="login-options-wrapper">
-       <div class="login-option">Forgot Your Password?</div>
-        <div class="login-option">Create New Account</div>
+       <a class="login-option">Forgot Your Password?</a>
+        <a [routerLink]="['/artist/create']" class="login-option">Create New Account></a>
+        
     </div>
 </div>

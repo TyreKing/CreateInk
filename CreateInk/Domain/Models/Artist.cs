@@ -42,10 +42,12 @@ namespace CreateInk.Models
                 LastName = dto.LastName,
                 Age = dto.Age,
                 Description = dto.Description,
-                RoleId = dto.Role.Id,
+                RoleId = Guid.Parse("B77FECCB-8928-42C1-BC8C-F82093FBCCB6"),
                 Arts = null,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Email = dto.Email,
+                Username = dto.UserName
             };
 
         }

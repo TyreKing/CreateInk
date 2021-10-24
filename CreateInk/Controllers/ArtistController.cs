@@ -104,12 +104,12 @@ namespace CreateInk.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpPost("", Name = "CreateArtist")]
+        [HttpPost("create", Name = "CreateArtist")]
         public IActionResult CreateArtist([FromBody] ArtistVm artistVm)
         {       
             // create user
-            _userService.CreateArtist(artistVm.ToDto());
-            return Ok();                     
+            var userId = _userService.CreateArtist(artistVm.ToDto());
+            return Ok(userId);                     
         }
 
         /// <summary>
