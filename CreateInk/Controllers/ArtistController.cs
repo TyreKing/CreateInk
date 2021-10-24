@@ -12,6 +12,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Swashbuckle.AspNetCore.Filters;
 using CreateInk.Helper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using CreateInk.Helpers.AuthenticationHelper;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace CreateInk.Controllers
 {
@@ -22,12 +30,48 @@ namespace CreateInk.Controllers
 
         private readonly ILogger<ArtistController> _logger;
         private readonly IUserService _userService;
+        private readonly AppSettings _appSettings;
 
-
-        public ArtistController(ILogger<ArtistController> logger, IUserService artistServices)
+        public ArtistController(ILogger<ArtistController> logger, IUserService artistServices, IOptions<AppSettings> appSettings)
         {
             _logger = logger;
             _userService = artistServices;
+            _appSettings = appSettings.Value;
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody] AuthenticateVm model)
+        {
+            var user = _userService.Authenticate(model.Username, model.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            // return basic user info and authentication token
+            return Ok(new
+            {
+                Id = user.Id,
+                Username = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Token = tokenString
+            });
         }
 
         /// <summary>
@@ -57,12 +101,15 @@ namespace CreateInk.Controllers
         /// CreateArtist
         /// </summary>
         /// <param name="artistVm"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        [HttpPost("", Name = "CreateArtist")]
+        [AllowAnonymous]
+        [HttpPost("create", Name = "CreateArtist")]
         public IActionResult CreateArtist([FromBody] ArtistVm artistVm)
-        {
-            var artistId = _userService.CreateArtist(artistVm.ToDto());
-            return CreatedAtAction("GetArtist", artistId);
+        {       
+            // create user
+            var userId = _userService.CreateArtist(artistVm.ToDto());
+            return Ok(userId);                     
         }
 
         /// <summary>

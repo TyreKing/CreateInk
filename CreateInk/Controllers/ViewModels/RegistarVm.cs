@@ -8,19 +8,13 @@ using System.Threading.Tasks;
 
 namespace CreateInk.Controllers.ViewModels
 {
-    public class ArtistVm
+    public class RegistarVm
     {
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
 
         [JsonProperty("lastName")]
         public string LastName { get; set; }
-
-        [JsonProperty("age")]
-        public int Age { get; set; }
-
-        [JsonProperty("description")]
-        public string Description { get; set; }
 
         [JsonProperty("roleId")]
         public Guid RoleId { get; set; }
@@ -37,15 +31,11 @@ namespace CreateInk.Controllers.ViewModels
             {
                 FirstName = FirstName,
                 LastName = LastName,
-                Age = Age,
-                Description = Description,
                 Role = new RoleDto()
                 {
                     Id = RoleId
                 },
-                Email = Email,
-                UserName = UserName,
-                Password = Password
+                
             };
         }
     }

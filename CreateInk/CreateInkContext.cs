@@ -24,6 +24,10 @@ namespace CreateInk.Context
             artistBuilder.Property(x => x.FirstName).HasMaxLength(255).IsRequired();
             artistBuilder.Property(x => x.LastName).HasMaxLength(255).IsRequired();
             artistBuilder.Property(x => x.Description).HasMaxLength(255);
+            artistBuilder.Property(x => x.PasswordSalt).IsRequired();
+            artistBuilder.Property(x => x.PasswordHash).IsRequired();
+            artistBuilder.Property(x => x.Username).IsRequired().HasMaxLength(25);
+            artistBuilder.Property(x => x.Email).IsRequired();
 
             var artBuilder = modelBuilder.Entity<Art>();
             artBuilder.Property(x => x.Description).HasMaxLength(255);

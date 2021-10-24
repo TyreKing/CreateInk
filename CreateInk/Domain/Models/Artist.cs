@@ -12,6 +12,8 @@ namespace CreateInk.Models
 
         public Guid Id { get; private set; }
 
+        public string Username { get; set; }
+
         public string FirstName { get; private set; }
 
         public string LastName { get; private set; }
@@ -26,7 +28,13 @@ namespace CreateInk.Models
 
         public virtual Role Role { get; private set; }
 
-        public static Artist Create(UserDto dto)
+        public byte [] PasswordHash { get; private set; }
+
+        public byte [] PasswordSalt { get; private set; }
+
+        public string  Email { get; set; }
+
+        public static Artist Create(UserDto dto, byte [] passwordHash, byte [] passwordSalt)
         {
             return new Artist()
             {
@@ -34,8 +42,12 @@ namespace CreateInk.Models
                 LastName = dto.LastName,
                 Age = dto.Age,
                 Description = dto.Description,
-                RoleId = dto.Role.Id,
-                Arts = null
+                RoleId = Guid.Parse("B77FECCB-8928-42C1-BC8C-F82093FBCCB6"),
+                Arts = null,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Email = dto.Email,
+                Username = dto.UserName
             };
 
         }

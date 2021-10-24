@@ -21,6 +21,8 @@ namespace CreateInk
 
         Guid UpdateArtist(Guid id, JsonPatchDocument<UserUpdateDto> patch);
 
+        UserDto Authenticate(string username, string password);
+
 
     }
 }

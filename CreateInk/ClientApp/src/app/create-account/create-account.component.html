@@ -1,0 +1,57 @@
+<div class="container">
+    <form [formGroup]="createAccountForm" (ngSubmit)="onSubmit()" class="content-wrapper">
+        <div class="content">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text"  formControlName="firstName" placeholder="First Name" class="form-control" id="firstName" name="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text"  formControlName="lastName" placeholder="Last Name" class="form-control" id="lastName" name="lastName">
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Date of Birth</label>
+                <input type="text"  formControlName="birthDate" placeholder="MM/DD/YYY" class="form-control" id="birthDate" name="birthDate">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text"  formControlName="password" placeholder="Password" class="form-control" id="password" name="password">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="text"  formControlName="email" placeholder="Email Address" class="form-control" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text"  formControlName="username" placeholder="Username" class="form-control" id="username" name="username">
+            </div>
+
+        </div>
+        <div class="logo-large middle">
+            <div class="logo"></div>
+            <div class="form-group confirm">
+                <label for="password">Confirm Password</label>
+                <input type="text"  formControlName="confirmPassword" placeholder="Password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group confirm">
+                <label for="email">Confirm Email</label>
+                <input type="text"  formControlName="confirmEmail" placeholder="Email Address" class="form-control" id="email" name="email">
+                <div class="submit-login">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="ink-drop">
+            <div class="blue">blue</div>
+            <div class="black">black</div>
+            <div class="red">red</div>
+        </div>
+    </form>
+    <div class="login-options-wrapper">
+        <a class="login-option">Forgot Your Password?</a>
+         <a [routerLink]="['/login']" class="login-option">Return To Login</a>
+         
+     </div>
+</div>
