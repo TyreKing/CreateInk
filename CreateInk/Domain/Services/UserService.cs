@@ -5,6 +5,7 @@ using CreateInk.Infrastructure.Repositories;
 using CreateInk.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace CreateInk.Services
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = _context.Artists.SingleOrDefault(x => x.Username == username);
+            var user = _context.Artists.Include(x => x.Role).ThenInclude(x => x.Permissions).SingleOrDefault(x => x.Username == username);
 
             // check if username exists
             if (user == null)

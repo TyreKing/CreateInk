@@ -62,7 +62,7 @@ namespace CreateInk.Models
                 Description = Description,
                 FirstName = FirstName,
                 LastName = LastName,
-                Role = Role.ToDto()
+               // Role = Role.ToDto()
             };
         }
 

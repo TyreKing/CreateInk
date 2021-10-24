@@ -1,14 +1,14 @@
 <div class="container">
-    <div class="content-wrapper">
+    <form [formGroup]= "loginForm" (ngSubmit)="onSubmit()" class="content-wrapper">
         <ul>
             <li class="logo"></li>
-            <li><input type="text" class="login-input username" placeholder="Username"></li>
-            <li><input type="text" class="login-input password" placeholder="Password"></li>
+            <li><input formControlName = "username" type="text" class="login-input username" placeholder="Username"></li>
+            <li><input formControlName = "password" type="text" class="login-input password" placeholder="Password"></li>
         </ul>
         <div class="submit-login">
-            <button class="btn">Login</button>
+            <button type="submit" class="btn">Login</button>
         </div>
-    </div>
+    </form>
     <div class="login-options-wrapper">
        <a class="login-option">Forgot Your Password?</a>
         <a [routerLink]="['/artist/create']" class="login-option">Create New Account></a>
