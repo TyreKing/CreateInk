@@ -13,6 +13,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -24,7 +25,8 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     CounterComponent,
     FetchDataComponent,
     CreateAccountComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,7 +38,8 @@ import { CreateAccountComponent } from './create-account/create-account.componen
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       {path: 'login', component: LoginComponent},
-      {path: 'artist/create', component: CreateAccountComponent}
+      {path: 'artist/create', component: CreateAccountComponent},
+      {path: 'artist', component: ProfileComponent}
     ])
   ],
   providers: [],
