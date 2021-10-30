@@ -16,7 +16,7 @@ namespace CreateInk.Domain.Enum
     {
         public static Dictionary<int, Guid> Attribute = new Dictionary<int, Guid>()
         {
-            {(int)AccessRoles.Artist, Guid.Parse("B77FECCB-8928-42C1-BC8C-F82093FBCCB6")},
+            {(int)AccessRoles.Artist, Guid.Parse("9E5C7BF1-A398-4AE5-8B9D-EFFA4ECB78D4")},
             {(int)AccessRoles.Admin, Guid.Parse("795DF5BE-7260-4857-AEF0-2C2288D026B0")},    
         };
     }

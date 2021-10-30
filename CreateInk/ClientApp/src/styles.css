@@ -17,5 +17,12 @@ code {
 
 body{
   background-color: #050533;
+  
+}
+
+.container{
+  max-width: 100vw;
+  padding: 0;
+  margin: 0;
 }
 

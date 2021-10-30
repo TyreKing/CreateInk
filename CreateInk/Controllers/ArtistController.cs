@@ -74,7 +74,7 @@ namespace CreateInk.Controllers
             });
         }
 
-        /// <summary>
+        ///// <summary>
         /// GetArtists
         /// </summary>
         /// <returns></returns>
@@ -91,7 +91,7 @@ namespace CreateInk.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetArtist")] //https://localhost:44369/artist/id?id=...
-        public IActionResult GetArtist(Guid id)
+        public IActionResult GetArtist([FromQuery] Guid id)
         {
             var result = _userService.GetArtist(id);
             return Ok(result);
@@ -123,6 +123,7 @@ namespace CreateInk.Controllers
             _userService.DeleteArtist(id);
             return Ok();
         }
+
 
         /// <summary>
         /// AddArt

@@ -24,7 +24,10 @@ namespace CreateInk.Infrastructure.Repositories
         /// <returns></returns>
         public Artist GetById(Guid id)
         {
-            var artist = _context.Artists.Include(x => x.Role).ThenInclude(x => x.Permissions).FirstOrDefault(x => x.Id == id);
+            var artist = _context.Artists
+                .Include(x => x.Role).ThenInclude(x => x.Permissions)
+                .Include(x => x.Arts)
+                .SingleOrDefault(x => x.Id == id);
             return artist;
         }
 
@@ -35,8 +38,10 @@ namespace CreateInk.Infrastructure.Repositories
         /// <returns></returns>
         public IQueryable<Artist> GetArtists()
         {
-            return _context.Artists.Include(x => x.Role).ThenInclude(x => x.Permissions).Where(x => x.RoleId == RolesEnum.Attribute[(int)AccessRoles.Artist]);
-             //_context.Artists.Where(x => x.RoleId == RolesEnum.Attribute[(int)AccessRoles.Artist]);
+            return _context.Artists
+                .Include(x => x.Role).ThenInclude(x => x.Permissions)
+                .Include(x => x.Arts)
+                .Where(x => x.RoleId == RolesEnum.Attribute[(int)AccessRoles.Artist]);
         }
 
         

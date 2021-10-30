@@ -1,21 +1,23 @@
 <div class="container">
-    <div class="banner">banner</div>
+    <div class="banner">
+        <img src="../../assets/UserImage/26d3cea8-44c0-bfbd-a91a-19a007517152.jpg" alt="Not found">
+    </div>
     <div class="bio-wrapper">
         <div class="bio-content">
-            <div class="pic">pic</div>
-            <div class="bio">bio</div>
+            <div class="pic">
+                <img src="../../assets/UserImage/26d3cea8-44c0-bfbd-a91a-19a007517152.jpg" alt="Not found">
+            </div>
+            <div class="bio">
+                <h3>{{artist?.firstName}}</h3>
+
+            </div>
         </div>
     </div>
     <div class="content">
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-        <div class="temp">block</div>
-
+        <ul *ngFor="let art of arts; let i = index">
+            <li>
+                <img src="../../assets/Arts/{{art}}.jpg" alt="Not found">
+            </li>
+        </ul>
     </div>
 </div>
